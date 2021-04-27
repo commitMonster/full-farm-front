@@ -4,12 +4,9 @@ import 'package:full_farm/features/auth/domain/entities/user.dart';
 import '../../../../core/error/failures.dart';
 
 abstract class AuthRepository {
-  Future<Either<Failure, bool>> checkUserId({
-    String userId
-  });
-
-  Future<Either<Failure, bool>> checkEmail({
-    String email
+  Future<Either<Failure, bool>> checkInputValidation({
+    String inputType,
+    String input
   });
 
   Future<Either<Failure, void>> signUp({

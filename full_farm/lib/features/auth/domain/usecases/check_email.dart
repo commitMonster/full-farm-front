@@ -7,26 +7,29 @@ import 'package:equatable/equatable.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecase/usecase.dart';
 
-class CheckEmailUseCase extends UseCase<bool, Params> {
+class CheckInputValidationUseCase extends UseCase<bool, Params> {
   final AuthRepository repository;
 
-  CheckEmailUseCase(this.repository);
+  CheckInputValidationUseCase(this.repository);
 
   @override
   Future<Either<Failure, bool>> call(Params params) async {
-    return await repository.checkEmail(
-      email: params.email,
+    return await repository.checkInputValidation(
+      inputType: params.inputType,
+      input: params.input,
     );
   }
 }
 
 class Params extends Equatable {
-  final String email;
+  final String inputType;
+  final String input;
 
   Params({
-    @required this.email,
+    @required this.inputType,
+    @required this.input,
   });
 
   @override
-  List<Object> get props => [email];
+  List<Object> get props => [inputType, input];
 }
