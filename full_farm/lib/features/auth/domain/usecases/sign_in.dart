@@ -7,13 +7,13 @@ import 'package:equatable/equatable.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecase/usecase.dart';
 
-class SignInUseCase extends UseCase<User, Params> {
+class SignInUseCase extends UseCase<User, SignInParams> {
   final AuthRepository repository;
 
   SignInUseCase(this.repository);
 
   @override
-  Future<Either<Failure, User>> call(Params params) async {
+  Future<Either<Failure, User>> call(SignInParams params) async {
     return await repository.signIn(
       userId: params.userId,
       password: params.password,
@@ -21,11 +21,11 @@ class SignInUseCase extends UseCase<User, Params> {
   }
 }
 
-class Params extends Equatable {
+class SignInParams extends Equatable {
   final String userId;
   final String password;
 
-  Params({
+  SignInParams({
     @required this.userId,
     @required this.password,
   });

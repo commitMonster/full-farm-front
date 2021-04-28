@@ -7,13 +7,13 @@ import 'package:equatable/equatable.dart';
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecase/usecase.dart';
 
-class CheckInputValidationUseCase extends UseCase<bool, Params> {
+class CheckInputValidationUseCase extends UseCase<bool, CheckInputValidationParams> {
   final AuthRepository repository;
 
   CheckInputValidationUseCase(this.repository);
 
   @override
-  Future<Either<Failure, bool>> call(Params params) async {
+  Future<Either<Failure, bool>> call(CheckInputValidationParams params) async {
     return await repository.checkInputValidation(
       inputType: params.inputType,
       input: params.input,
@@ -21,11 +21,11 @@ class CheckInputValidationUseCase extends UseCase<bool, Params> {
   }
 }
 
-class Params extends Equatable {
+class CheckInputValidationParams extends Equatable {
   final String inputType;
   final String input;
 
-  Params({
+  CheckInputValidationParams({
     @required this.inputType,
     @required this.input,
   });
