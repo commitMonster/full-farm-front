@@ -47,3 +47,7 @@ app.*.map.json
 
 # Configuration related
 /lib/app/config.dart
+
+
+# Test code
+*Test.dart

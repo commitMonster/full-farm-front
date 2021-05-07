@@ -1,3 +1,3 @@
 import 'package:flutter/material.dart';
 
-Text componentTestTwo = Text('footer');
+Text footer = Text('footer 구현 예정');
