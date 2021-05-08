@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:full_farm/component/Footer.dart';
 import 'package:full_farm/component/Header.dart';
-
+import 'package:full_farm/component/Searching.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -13,25 +13,16 @@ class MyApp extends StatelessWidget {
               children: [
 
                 Header(),
-                Container(
-                  width:80,
-                  child:Center(
-                      child:Text('검색창 구현 예정'),
-                ),
-                ),
-
-                Image.asset('image/full-farm-logo.jpg',
+                SearchingInput(),
+                Image.asset('image/forest.jpg',
                       width: 600,
-                      height: 400,
+                      height:600,
                       fit: BoxFit.cover),
 
+                Footer(),
 
-                footer,
 
 
-                textSection,
-                textSection,
-                textSection,
               ]),
         )
     );
