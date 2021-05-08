@@ -10,6 +10,7 @@ Widget _LatestProduct({image, text}) {
           child:
           Image.asset(
               'image/full-farm-logo.jpg'
+                  //이미지파일도 받아올수 있게 구현할
           ),
       ),
 
