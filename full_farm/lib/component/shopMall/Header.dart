@@ -38,14 +38,15 @@ Widget fullFarmIcon = Container(
     image: DecorationImage(image: AssetImage('image/full-farm-logo.png')),
   ),
   //BoxDecoration
-  child:TextButton(
+  child: FlatButton(
+    padding: EdgeInsets.all(0.0),
     onPressed: () => {print('button Clicked')},
     child: Container(),
-    ),
+  ),
 );
 
 
-Widget _headerMenu(name) {
+Widget _headerMenu(name,{menuSelected}) {
   return Container(
       child: TextButton(
         onPressed: () => {print('Main menu')},
@@ -53,6 +54,7 @@ Widget _headerMenu(name) {
           name,
           style: TextStyle(
             color: Colors.black,
+            fontSize : menuSelected? 20 : 10,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -83,6 +85,7 @@ Widget _authMenu() {
 }
 
 Widget headerMenuList({width}) {
+  final bool menuSelected = true;
   return (Container(
       width: width,
       margin: EdgeInsets.only(right: 40),

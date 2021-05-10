@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 Widget _LatestProduct({image, text}) {
   return (Column(
     children: [
-      OutlineButton(onPressed: ()=>{print('Latest Product')},
+      TextButton(onPressed: ()=>{print('Latest Product')},
           child:
           Image.asset(
               'image/full-farm-logo.jpg'

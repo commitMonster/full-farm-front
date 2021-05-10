@@ -3,6 +3,8 @@ import 'package:full_farm/component/main/Footer.dart';
 import 'package:full_farm/component/main/Header.dart';
 import 'package:full_farm/component/main/Searching.dart';
 import 'package:full_farm/component/main/LatestProducts.dart';
+import 'package:full_farm/component/main/Banner.dart';
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -14,10 +16,11 @@ class MyApp extends StatelessWidget {
               children: [
                 Header(),
                 SearchingInput(),
-                Image.asset('image/forest.jpg',
-                      width: 600,
-                      height:500,
-                      fit: BoxFit.cover),
+                EventBanner(),
+                // Image.asset('image/forest.jpg',
+                //       width: 600,
+                //       height:500,
+                //       fit: BoxFit.cover),
                 LatestProductsList(),
 
                 Footer(),

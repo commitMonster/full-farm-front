@@ -33,4 +33,9 @@ class SearchingInput extends StatelessWidget {
       ),
     );
   }
+
+
+
+  // Mycontroller 사용해서 검색기능 구현 필요
 }
+
