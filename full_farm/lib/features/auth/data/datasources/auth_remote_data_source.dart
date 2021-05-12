@@ -47,7 +47,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     String inputType,
     String input
   }) async {
-    Uri url = Uri.https(Config.API_BASE_URL, '/auth/check/$inputType');
+    Uri url = Uri.https(Config.API_BASE_URL, '/api/auth/check/${inputType}');
 
     Map<String, String> headers = {
       'Content-Type': 'application/json',
@@ -55,12 +55,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     Map<String, String> body = {
       inputType: input
     };
+    var jsonBody = jsonEncode(body);
 
     final response = await client.post(
       url,
       headers: headers,
-      body: body,
+      body: jsonBody,
     );
+
     if (response.statusCode == 200) {
       var jsonMap = json.decode(response.body);
       return jsonMap['isDuplicated'];
