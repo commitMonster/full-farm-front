@@ -12,12 +12,12 @@ import '../../../../core/network/network_info.dart';
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource remoteDataSource;
   final AuthLocalDataSource localDataSource;
-  final NetworkInfo networkInfo;
+  // final NetworkInfo networkInfo;
 
   AuthRepositoryImpl({
     @required this.remoteDataSource,
     @required this.localDataSource,
-    @required this.networkInfo,
+    // @required this.networkInfo,
   });
 
   @override
@@ -44,7 +44,7 @@ class AuthRepositoryImpl implements AuthRepository {
     String email,
     String address
   }) async {
-    if(await networkInfo.isConnected){
+    // if(await networkInfo.isConnected){
       try{
         final signUp = await remoteDataSource.signUp(
             userId: userId,
@@ -57,9 +57,9 @@ class AuthRepositoryImpl implements AuthRepository {
       } on ServerException {
         return Left(ServerFailure());
       }
-    } else {
-      throw NetworkFailure();
-    }
+    // } else {
+    //   throw NetworkFailure();
+    // }
   }
 
   @override
@@ -67,7 +67,7 @@ class AuthRepositoryImpl implements AuthRepository {
     String userId,
     String password
   }) async {
-    if(await networkInfo.isConnected){
+    // if(await networkInfo.isConnected){
       try{
         final signIn = await remoteDataSource.signIn(
           userId: userId,
@@ -81,9 +81,9 @@ class AuthRepositoryImpl implements AuthRepository {
       } on ServerException {
         return Left(ServerFailure());
       }
-    } else {
-      throw NetworkFailure();
-    }
+    // } else {
+    //   throw NetworkFailure();
+    // }
   }
 
   @override
