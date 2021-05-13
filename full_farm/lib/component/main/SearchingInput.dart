@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
 
-class Searching extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(child: Text('123'));
-  }
-}
-
 Widget _searchIconButton = IconButton(
   iconSize: 30,
   icon: const Icon(Icons.search),

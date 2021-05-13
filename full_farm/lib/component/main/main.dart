@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:full_farm/component/main/Footer.dart';
 import 'package:full_farm/component/main/Header.dart';
-import 'package:full_farm/component/main/Searching.dart';
+import 'package:full_farm/component/main/SearchingInput.dart';
 import 'package:full_farm/component/main/LatestProducts.dart';
 import 'package:full_farm/component/main/Banner.dart';
 
