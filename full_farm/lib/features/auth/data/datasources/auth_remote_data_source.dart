@@ -3,13 +3,11 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:full_farm/app/config.dart';
 import 'package:full_farm/features/auth/data/models/user_model.dart';
-import 'package:full_farm/features/auth/domain/entities/user.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/error/exceptions.dart';
-import 'auth_local_data_source.dart';
 
 abstract class AuthRemoteDataSource {
   Future<bool> checkInputValidation({
@@ -79,7 +77,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     String email,
     String address
   }) async {
-    Uri url = Uri.https(Config.API_BASE_URL, '/auth/signup');
+    Uri url = Uri.https(Config.API_BASE_URL, '/api/auth/signup');
 
     Map<String, String> headers = {
       'Content-Type': 'application/json',
@@ -92,11 +90,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       'address': address
     };
 
+    var jsonBody = jsonEncode(body);
+
     final response = await client.post(
       url,
       headers: headers,
-      body: body,
+      body: jsonBody,
     );
+
     if (response.statusCode == 200) {
       var jsonMap = json.decode(response.body);
       return UserModel.fromJson(jsonMap);
@@ -111,7 +112,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     String userId,
     String password
   }) async {
-    Uri url = Uri.https(Config.API_BASE_URL, '/auth/signin');
+    Uri url = Uri.https(Config.API_BASE_URL, '/api/auth/signin');
 
     Map<String, String> headers = {
       'Content-Type': 'application/json',
@@ -121,11 +122,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       "password": password,
     };
 
+    var jsonBody = jsonEncode(body);
+
     final response = await client.post(
       url,
       headers: headers,
-      body: body,
+      body: jsonBody,
     );
+
     if (response.statusCode == 200) {
       final token = response.headers['Set-Cookie'];
       var jsonMap = json.decode(response.body);
@@ -138,7 +142,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<void> signOut() async {
-    Uri url = Uri.https(Config.API_BASE_URL, '/auth/signout');
+    Uri url = Uri.https(Config.API_BASE_URL, '/api/auth/signout');
 
     Map<String, String> headers = {
       'Cookie': 'application/json',
@@ -149,6 +153,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       headers: headers,
       body: null,
     );
+
     if (response.statusCode == 200) {
 
     } else {
