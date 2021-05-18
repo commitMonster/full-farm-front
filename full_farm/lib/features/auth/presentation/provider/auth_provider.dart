@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:full_farm/core/usecase/usecase.dart';
 import 'package:full_farm/features/auth/domain/entities/user.dart';
-import 'package:full_farm/features/auth/domain/usecases/check_email.dart';
+import 'package:full_farm/features/auth/domain/usecases/check_input_validation.dart';
 import 'package:full_farm/features/auth/domain/usecases/sign_out.dart';
 import 'package:full_farm/features/auth/domain/usecases/sign_in.dart';
 import 'package:full_farm/features/auth/domain/usecases/sign_up.dart';
@@ -22,10 +22,10 @@ class AuthProvider with ChangeNotifier {
 
   User _user;
   User get userEntity => _user;
-  bool _userIdValidation = false;
-  bool get userIdValidation => _userIdValidation;
-  bool _emailValidation = false;
-  bool get emailValidation => _emailValidation;
+  bool _isUserIdDuplicated;
+  bool get isUserIdDuplicated => _isUserIdDuplicated;
+  bool _isEmailDuplicated;
+  bool get isEmailDuplicated => _isEmailDuplicated;
 
   Future<void> checkInputValidation({
     @required String inputType,
@@ -39,14 +39,16 @@ class AuthProvider with ChangeNotifier {
     );
     response.fold(
       (failure) {
+        _isUserIdDuplicated = null;
+        _isEmailDuplicated = null;
       },
-      (success) {
+      (isDuplicated) {
         switch (inputType) {
-          case "email":
-            _emailValidation = success;
-            break;
           case "userId":
-            _userIdValidation = success;
+            _isUserIdDuplicated = isDuplicated;
+            break;
+          case "email":
+            _isEmailDuplicated = isDuplicated;
             break;
         }
       },

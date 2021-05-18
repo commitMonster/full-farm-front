@@ -3,7 +3,7 @@ import 'package:full_farm/features/auth/data/datasources/auth_local_data_source.
 import 'package:full_farm/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:full_farm/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:full_farm/features/auth/domain/repositories/auth_repository.dart';
-import 'package:full_farm/features/auth/domain/usecases/check_email.dart';
+import 'package:full_farm/features/auth/domain/usecases/check_input_validation.dart';
 import 'package:full_farm/features/auth/domain/usecases/sign_in.dart';
 import 'package:full_farm/features/auth/domain/usecases/sign_out.dart';
 import 'package:full_farm/features/auth/domain/usecases/sign_up.dart';
@@ -18,7 +18,7 @@ final sl = GetIt.instance;
 
 Future<void> init() async {
   // Provider
-  sl.registerFactory<AuthProvider>(
+  sl.registerLazySingleton(
         () => AuthProvider(
       checkInputValidationUseCase: sl(),
       signInUseCase: sl(),
