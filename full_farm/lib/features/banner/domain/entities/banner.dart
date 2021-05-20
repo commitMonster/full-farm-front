@@ -1,3 +1,4 @@
+import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 
 class Banner extends Equatable {
@@ -11,14 +12,14 @@ class Banner extends Equatable {
   final String endDate;
 
   Banner({
-    this.id,
-    this.title,
-    this.description,
-    this.type,
-    this.image,
-    this.activation,
-    this.startDate,
-    this.endDate,
+    @required this.id,
+    @required this.title,
+    @required this.description,
+    @required this.type,
+    @required this.image,
+    @required this.activation,
+    @required this.startDate,
+    @required this.endDate,
   });
 
   @override

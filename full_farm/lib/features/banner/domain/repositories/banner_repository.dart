@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:meta/meta.dart';
 import 'package:full_farm/core/error/failures.dart';
 import 'package:full_farm/features/banner/domain/entities/banner.dart';
 
@@ -11,24 +12,24 @@ abstract class BannerRepository {
   });
 
   Future<Either<Failure, Banner>> readBannerById({
-    int id,
+    @required int id,
   });
 
   Future<Either<Failure, Banner>> createBanner({
-    Banner banner,
+    @required Banner banner,
   });
 
   Future<Either<Failure, Banner>> updateBanner({
-    int id,
-    Banner banner,
+    @required int id,
+    @required Banner banner,
   });
 
   Future<Either<Failure, Banner>> updateActivationOfBanner({
-    int id,
-    bool activation,
+    @required int id,
+    @required bool activation,
   });
 
   Future<Either<Failure, void>> deleteBanner({
-    int id,
+    @required int id,
   });
 }
