@@ -16,23 +16,43 @@ class UpdateBannerUseCase extends UseCase<Banner, UpdateBannerParams> {
   Future<Either<Failure, Banner>> call(UpdateBannerParams params) async {
     return await repository.updateBanner(
       id: params.id,
-      banner: params.banner,
+      title: params.title,
+      description: params.description,
+      type: params.type,
+      image: params.image,
+      startDate: params.startDate,
+      endDate: params.endDate,
     );
   }
 }
 
 class UpdateBannerParams extends Equatable {
   final int id;
-  final Banner banner;
+  final String title;
+  final String description;
+  final int type;
+  final List<String> image;
+  final String startDate;
+  final String endDate;
 
   UpdateBannerParams({
     @required this.id,
-    @required this.banner,
+    @required this.title,
+    @required this.description,
+    @required this.type,
+    @required this.image,
+    @required this.startDate,
+    @required this.endDate,
   });
 
   @override
   List<Object> get props => [
     id,
-    banner,
+    title,
+    description,
+    type,
+    image,
+    startDate,
+    endDate,
   ];
 }

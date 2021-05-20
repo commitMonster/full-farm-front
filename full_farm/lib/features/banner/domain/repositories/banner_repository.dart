@@ -16,12 +16,22 @@ abstract class BannerRepository {
   });
 
   Future<Either<Failure, Banner>> createBanner({
-    @required Banner banner,
+    @required String title,
+    @required String description,
+    @required int type,
+    @required List<String> image,
+    @required String startDate,
+    @required String endDate,
   });
 
   Future<Either<Failure, Banner>> updateBanner({
     @required int id,
-    @required Banner banner,
+    @required String title,
+    @required String description,
+    @required int type,
+    @required List<String> image,
+    @required String startDate,
+    @required String endDate,
   });
 
   Future<Either<Failure, Banner>> updateActivationOfBanner({

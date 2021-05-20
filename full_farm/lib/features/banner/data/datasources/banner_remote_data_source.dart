@@ -23,13 +23,23 @@ abstract class BannerRemoteDataSource {
 
   Future<Banner> createBanner({
     @required String session,
-    @required Banner banner,
+    @required String title,
+    @required String description,
+    @required int type,
+    @required List<String> image,
+    @required String startDate,
+    @required String endDate,
   });
 
   Future<Banner> updateBanner({
     @required String session,
     @required int id,
-    @required Banner banner,
+    @required String title,
+    @required String description,
+    @required int type,
+    @required List<String> image,
+    @required String startDate,
+    @required String endDate,
   });
 
   Future<Banner> updateActivationOfBanner({
@@ -105,7 +115,12 @@ class BannerRemoteDataSourceImpl implements BannerRemoteDataSource {
   @override
   Future<Banner> createBanner({
     @required String session,
-    @required Banner banner,
+    @required String title,
+    @required String description,
+    @required int type,
+    @required List<String> image,
+    @required String startDate,
+    @required String endDate,
   }) async {
     Uri url = Uri.https(Config.API_BASE_URL, '/api/banner');
 
@@ -114,12 +129,12 @@ class BannerRemoteDataSourceImpl implements BannerRemoteDataSource {
     };
 
     Map<String, Object> body = {
-      "title": banner.title,
-      "description": banner.description,
-      "type": banner.type,
-      "image": banner.image,
-      "startDate": banner.startDate,
-      "endDate": banner.endDate,
+      "title": title,
+      "description": description,
+      "type": type,
+      "image": image,
+      "startDate": startDate,
+      "endDate": endDate,
     };
 
     var jsonBody = jsonEncode(body);
@@ -142,7 +157,12 @@ class BannerRemoteDataSourceImpl implements BannerRemoteDataSource {
   Future<Banner> updateBanner({
     @required String session,
     @required int id,
-    @required Banner banner,
+    @required String title,
+    @required String description,
+    @required int type,
+    @required List<String> image,
+    @required String startDate,
+    @required String endDate,
   }) async {
     Uri url = Uri.https(Config.API_BASE_URL, '/api/banner/${id}');
 
@@ -151,12 +171,12 @@ class BannerRemoteDataSourceImpl implements BannerRemoteDataSource {
     };
 
     Map<String, Object> body = {
-      "title": banner.title,
-      "description": banner.description,
-      "type": banner.type,
-      "image": banner.image,
-      "startDate": banner.startDate,
-      "endDate": banner.endDate,
+      "title": title,
+      "description": description,
+      "type": type,
+      "image": image,
+      "startDate": startDate,
+      "endDate": endDate,
     };
 
     var jsonBody = jsonEncode(body);

@@ -50,13 +50,23 @@ class BannerRepositoryImpl implements BannerRepository {
   }
 
   Future<Either<Failure, Banner>> createBanner({
-    @required Banner banner,
+    @required String title,
+    @required String description,
+    @required int type,
+    @required List<String> image,
+    @required String startDate,
+    @required String endDate,
   }) async {
     try{
       final session = await localDataSource.getCachedSession();
       final response = await remoteDataSource.createBanner(
         session: session,
-        banner: banner,
+        title: title,
+        description: description,
+        type: type,
+        image: image,
+        startDate: startDate,
+        endDate: endDate,
       );
       return Right(response);
     } on ServerException {
@@ -66,14 +76,24 @@ class BannerRepositoryImpl implements BannerRepository {
 
   Future<Either<Failure, Banner>> updateBanner({
     @required int id,
-    @required Banner banner,
+    @required String title,
+    @required String description,
+    @required int type,
+    @required List<String> image,
+    @required String startDate,
+    @required String endDate,
   }) async {
     try{
       final session = await localDataSource.getCachedSession();
       final response = await remoteDataSource.updateBanner(
         session: session,
         id: id,
-        banner: banner,
+        title: title,
+        description: description,
+        type: type,
+        image: image,
+        startDate: startDate,
+        endDate: endDate,
       );
       return Right(response);
     } on ServerException {
