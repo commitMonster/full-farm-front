@@ -6,21 +6,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/error/exceptions.dart';
 
 abstract class AuthLocalDataSource {
-  Future<String> getCachedToken();
+  Future<String> getCachedSession();
 
   Future<UserModel> getCachedUser();
 
-  Future<void> cacheToken(String token);
+  Future<void> cacheSession(String session);
 
   Future<void> cacheUser(UserModel userModel);
 
-  Future<bool> removeCachedToken();
+  Future<bool> removeCachedSession();
 
   Future<bool> removeCachedUser();
 }
 
 const CACHED_USER = 'CACHED_USER';
-const CACHED_TOKEN = 'CACHED_TOKEN';
+const CACHED_SESSION = 'CACHED_SESSION';
 
 class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   final SharedPreferences sharedPreferences;
@@ -30,10 +30,10 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   });
 
   @override
-  Future<void> cacheToken(String token) {
+  Future<void> cacheSession(String session) {
     return sharedPreferences.setString(
-      CACHED_TOKEN,
-      token,
+      CACHED_SESSION,
+      session,
     );
   }
 
@@ -46,10 +46,10 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   }
 
   @override
-  Future<String> getCachedToken() {
-    final token = sharedPreferences.getString(CACHED_TOKEN);
-    if (token != null) {
-      return Future.value(token);
+  Future<String> getCachedSession() {
+    final session = sharedPreferences.getString(CACHED_SESSION);
+    if (session != null) {
+      return Future.value(session);
     } else {
       throw CacheException();
     }
@@ -66,10 +66,10 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   }
 
   @override
-  Future<bool> removeCachedToken() {
-    final token = sharedPreferences.getString(CACHED_TOKEN);
-    if (token != null) {
-      sharedPreferences.remove(CACHED_TOKEN);
+  Future<bool> removeCachedSession() {
+    final session = sharedPreferences.getString(CACHED_SESSION);
+    if (session != null) {
+      sharedPreferences.remove(CACHED_SESSION);
       return Future.value(true);
     } else {
       return Future.value(false);
@@ -78,8 +78,8 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
 
   @override
   Future<bool> removeCachedUser() {
-    final token = sharedPreferences.getString(CACHED_USER);
-    if (token != null) {
+    final session = sharedPreferences.getString(CACHED_USER);
+    if (session != null) {
       sharedPreferences.remove(CACHED_USER);
       return Future.value(true);
     } else {
