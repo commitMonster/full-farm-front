@@ -89,7 +89,10 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, void>> signOut() async {
     try{
-      final signOut = await remoteDataSource.signOut();
+      final session = await localDataSource.getCachedSession();
+      final signOut = await remoteDataSource.signOut(
+        session: session
+      );
       await localDataSource.removeCachedSession();
       await localDataSource.removeCachedUser();
       return Right(signOut);

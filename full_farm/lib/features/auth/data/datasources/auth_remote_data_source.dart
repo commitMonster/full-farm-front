@@ -5,45 +5,44 @@ import 'package:full_farm/app/config.dart';
 import 'package:full_farm/features/auth/data/models/user_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/error/exceptions.dart';
 
 abstract class AuthRemoteDataSource {
   Future<bool> checkInputValidation({
-    String inputType,
-    String input
+    @required String inputType,
+    @required String input,
   });
 
   Future<void> signUp({
-    String userId,
-    String password,
-    String name,
-    String email,
-    String address
+    @required String userId,
+    @required String password,
+    @required String name,
+    @required String email,
+    String address,
   });
 
   Future<Tuple2<String, UserModel>> signIn({
-    String userId,
-    String password
+    @required String userId,
+    @required String password,
   });
 
-  Future<void> signOut();
+  Future<void> signOut({
+    @required String session,
+  });
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final http.Client client;
-  final SharedPreferences sharedPreferences;
 
   AuthRemoteDataSourceImpl({
     @required this.client,
-    @required this.sharedPreferences,
   });
 
   @override
   Future<bool> checkInputValidation({
     String inputType,
-    String input
+    String input,
   }) async {
     Uri url = Uri.https(Config.API_BASE_URL, '/api/auth/check/${inputType}');
 
@@ -51,7 +50,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       'Content-Type': 'application/json',
     };
     Map<String, String> body = {
-      inputType: input
+      inputType: input,
     };
     var jsonBody = jsonEncode(body);
 
@@ -75,7 +74,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     String password,
     String name,
     String email,
-    String address
+    String address,
   }) async {
     Uri url = Uri.https(Config.API_BASE_URL, '/api/auth/signup');
 
@@ -87,7 +86,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       'password': password,
       'name': name,
       'email': email,
-      'address': address
+      'address': address,
     };
 
     var jsonBody = jsonEncode(body);
@@ -110,7 +109,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<Tuple2<String, UserModel>> signIn({
     String userId,
-    String password
+    String password,
   }) async {
     Uri url = Uri.https(Config.API_BASE_URL, '/api/auth/signin');
 
@@ -141,11 +140,13 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<void> signOut() async {
+  Future<void> signOut({
+    String session,
+  }) async {
     Uri url = Uri.https(Config.API_BASE_URL, '/api/auth/signout');
 
     Map<String, String> headers = {
-      'Cookie': 'application/json',
+      'Cookie': session,
     };
 
     final response = await client.post(
@@ -155,7 +156,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     );
 
     if (response.statusCode == 200) {
-
+      return;
     } else {
       throw ServerException();
     }

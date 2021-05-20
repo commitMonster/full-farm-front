@@ -49,14 +49,13 @@ Future<void> init() async {
   sl.registerLazySingleton<AuthRemoteDataSource>(
         () => AuthRemoteDataSourceImpl(
       client: sl(),
-      sharedPreferences: sl(),
     ),
   );
 
   sl.registerLazySingleton<AuthLocalDataSource>(
-          () => AuthLocalDataSourceImpl(
-        sharedPreferences: sl(),
-      )
+        () => AuthLocalDataSourceImpl(
+      sharedPreferences: sl(),
+    ),
   );
 
   //! Core
