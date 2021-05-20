@@ -8,7 +8,32 @@ class Failure extends Equatable{
 
 }
 // General failures
-class ServerFailure extends Failure {}
+class ServerFailure extends Failure {
+  @override
+  List<Object> get props => [];
+}
 
-class CacheFailure extends Failure {}
-class CacheFailureToken extends Failure {}
+class CacheFailure extends Failure {
+  @override
+  List<Object> get props => [];
+}
+
+class InvalidInputFailure extends Failure {
+  @override
+  List<Object> get props => [];
+}
+
+class InvalidJsonFailure extends Failure {
+  @override
+  List<Object> get props => [];
+}
+
+class EncryptionFailure extends Failure {
+  @override
+  List<Object> get props => null;
+}
+
+class NetworkFailure extends Failure {
+  @override
+  List<Object> get props => [];
+}
