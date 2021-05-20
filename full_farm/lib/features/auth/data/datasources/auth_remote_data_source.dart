@@ -131,10 +131,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     );
 
     if (response.statusCode == 200) {
-      final token = response.headers['Set-Cookie'];
+      final session = response.headers['Set-Cookie'];
       var jsonMap = json.decode(response.body);
       UserModel userModel = UserModel.fromJson(jsonMap);
-      return Tuple2(token, userModel);
+      return Tuple2(session, userModel);
     } else {
       throw ServerException();
     }

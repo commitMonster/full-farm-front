@@ -73,8 +73,8 @@ class AuthRepositoryImpl implements AuthRepository {
           userId: userId,
           password: password
         );
-        final token = signIn.value1;
-        await localDataSource.cacheToken(token);
+        final session = signIn.value1;
+        await localDataSource.cacheSession(session);
         final user = signIn.value2;
         await localDataSource.cacheUser(user);
         return Right(user);
@@ -90,7 +90,7 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, void>> signOut() async {
     try{
       final signOut = await remoteDataSource.signOut();
-      await localDataSource.removeCachedToken();
+      await localDataSource.removeCachedSession();
       await localDataSource.removeCachedUser();
       return Right(signOut);
     } on CacheException {
